@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="float的个人博客">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="多目标最优化模型及其算法应用一.大纲 多目标最优化模型概论 传统最优化解决方法 现代最优化算法 样例示范  二.多目标最优化模型概论1.对于多余一个的目标函数在给定区域内的最优化问题称为多目标优化问题。 ​            例如：在给定条件下，设计一款汽车，既要满足安全（重量大），又要满足经济（耗油量小）即为多目标最优化问题。 ​            该模型通常可总述为： ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多目标最优化模型及其算法应用">
+<meta property="og:url" content="http://example.com/2021/09/25/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%9C%80%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B%E5%8F%8A%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="float">
+<meta property="og:description" content="多目标最优化模型及其算法应用一.大纲 多目标最优化模型概论 传统最优化解决方法 现代最优化算法 样例示范  二.多目标最优化模型概论1.对于多余一个的目标函数在给定区域内的最优化问题称为多目标优化问题。 ​            例如：在给定条件下，设计一款汽车，既要满足安全（重量大），又要满足经济（耗油量小）即为多目标最优化问题。 ​            该模型通常可总述为： ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714115635294.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714122308210.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714130039695.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714130350383.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714130716648.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714130859365.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714131448353.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714131849213.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714131908134.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20180928200948897?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180928093456676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714132954604.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20180928194624441?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714133202324.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714134533866.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714135013536.png">
+<meta property="og:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714135454124.png">
+<meta property="article:published_time" content="2021-09-25T13:32:46.135Z">
+<meta property="article:modified_time" content="2021-09-25T13:37:04.930Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数学建模">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20210714115635294.png">
+  
+  <title>多目标最优化模型及其算法应用 - float</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Q70z977ec13I7d2rb4KYtLAA-gzGzoHsz","app_key":"ITSfPllxzGWL1eYj7FINIc2n","server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>float</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="多目标最优化模型及其算法应用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-25 21:32" pubdate>
+        2021年9月25日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">多目标最优化模型及其算法应用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="多目标最优化模型及其算法应用"><a href="#多目标最优化模型及其算法应用" class="headerlink" title="多目标最优化模型及其算法应用"></a>多目标最优化模型及其算法应用</h1><h6 id="一-大纲"><a href="#一-大纲" class="headerlink" title="一.大纲"></a>一.大纲</h6><ol>
+<li>多目标最优化模型概论</li>
+<li>传统最优化解决方法</li>
+<li>现代最优化算法</li>
+<li>样例示范</li>
+</ol>
+<h6 id="二-多目标最优化模型概论"><a href="#二-多目标最优化模型概论" class="headerlink" title="二.多目标最优化模型概论"></a>二.多目标最优化模型概论</h6><p>1.对于多余一个的目标函数在给定区域内的最优化问题称为多目标优化问题。</p>
+<p>​            例如：在给定条件下，设计一款汽车，既要满足安全（重量大），又要满足经济（耗油量小）即为多目标最优化问题。</p>
+<p>​            该模型通常可总述为：</p>
+<p>​                                                    <img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714115635294.png" srcset="/img/loading.gif" lazyload alt="image-20210714115635294"></p>
+<p>​                其中x=(x1,x2,x3…xn)所在的空间Ω称为决策空间(可行解空间)，向量F(x)所在的空间为目标空间</p>
+<p>​            不同于单目标优化，在多目标优化中，各目标函数之间是相互冲突的。导致不一定存在在所有目标函数上都是最优解，某个解可能在一个目标函数中是最优的，但在另一个目标函数中是最差(判断多目标优化问题的关键)</p>
+<p>​            因此，多目标最优化问题得到的通常是一个解集，他们之间不能简单地比较优劣，这样的被称为非支配解（有效解），<strong>Pareto最优解</strong>。</p>
+<h6 id="2-多目标优化相关概念："><a href="#2-多目标优化相关概念：" class="headerlink" title="2.多目标优化相关概念："></a>2.多目标优化相关概念：</h6><ul>
+<li><p>定义一</p>
+<p>向量支配对于最小化问题，一个向量u=(u<del>1</del>,u<del>2</del>…u<del>n</del>)支配另一个向量v=(v<del>1</del>,v<del>2</del>…v<del>n</del>)，当且仅当</p>
+<p>u<del>i</del>≤v<del>i</del></p>
+</li>
+<li><p>定义二</p>
+<p>如果Ω中没有支配(优于)x的解，则称x是该问题的一个Pareto最优解(非劣解，有效解，非支配解)</p>
+<p>Pareto最优解的全体组成的集合称为Pareto最优解集，Pareto最优解集在目标函数空间的像集称为Pareto Front(Pareto 前沿)</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714122308210.png" srcset="/img/loading.gif" lazyload alt="image-20210714122308210"></p>
+<p>​    如上图所示，<strong>A，B两点中是一个最优解</strong>，他们相应的自变量向量没有被其他任何的自变量向量所支配，也就意味着在任何一个目标上他们都不能被其他个体所支配。这样的解就是Pareto最优解。</p>
+<p>​    由定义一和定义二可知C点优于D点，C点优于F点，C点优于E点</p>
+</li>
+</ul>
+<h6 id="三-传统最优化解决方法-点到点优化"><a href="#三-传统最优化解决方法-点到点优化" class="headerlink" title="三.传统最优化解决方法(点到点优化)"></a>三.传统最优化解决方法(点到点优化)</h6><h6 id="1-传统的处理多目标优化问题方法主要分为"><a href="#1-传统的处理多目标优化问题方法主要分为" class="headerlink" title="1.传统的处理多目标优化问题方法主要分为"></a>1.传统的处理多目标优化问题方法主要分为</h6><ul>
+<li><h6 id="主要目标法"><a href="#主要目标法" class="headerlink" title="主要目标法"></a>主要目标法</h6></li>
+<li><h6 id="分层序列法"><a href="#分层序列法" class="headerlink" title="分层序列法"></a>分层序列法</h6></li>
+<li><h6 id="加权法"><a href="#加权法" class="headerlink" title="加权法"></a>加权法</h6></li>
+<li><h6 id="约束法"><a href="#约束法" class="headerlink" title="约束法"></a>约束法</h6></li>
+<li><h6 id="极小极大法"><a href="#极小极大法" class="headerlink" title="极小极大法"></a>极小极大法</h6></li>
+<li><h6 id="理想点法"><a href="#理想点法" class="headerlink" title="理想点法"></a>理想点法</h6></li>
+<li><p>……</p>
+</li>
+</ul>
+<p>其共同特点都是通过各种方式将多目标优化问题转化为单目标优化问题，然后应用单目标优化方法进行求解</p>
+<h6 id="①主要目标法"><a href="#①主要目标法" class="headerlink" title="①主要目标法"></a>①主要目标法</h6><p>从m个目标中，确定一个为主要目标，其余目标作为次要目标，根据实际情况确定适当的界限值，把次要目标转化为约束条件来处理。可总述为下列模型</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714130039695.png" srcset="/img/loading.gif" lazyload alt="image-20210714130039695"></p>
+<h6 id="②分层序列法"><a href="#②分层序列法" class="headerlink" title="②分层序列法"></a>②分层序列法</h6><p>把m个目标，按照重要程度排一个次序。不妨重要程度次序为f<del>1</del>(x)，f<del>2</del>(x)…f<del>n</del>(x)，</p>
+<p>先求问题1：</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714130350383.png" srcset="/img/loading.gif" lazyload alt="image-20210714130350383"></p>
+<p>得到最优解为x^(1)^,以及最优值为f<del>1</del>^*^</p>
+<p>再求问题2：</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714130716648.png" srcset="/img/loading.gif" lazyload alt="image-20210714130716648"></p>
+<p>得到最优解为x^(2)^,以及最优值为f<del>2</del>^*^</p>
+<p>再求问题3：</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714130859365.png" srcset="/img/loading.gif" lazyload alt="image-20210714130859365"></p>
+<p>得到最优解为x^(3)^,以及最优值为f<del>3</del>^*^</p>
+<p>以此类推直至求出问题m，所得到的解[x<del>1</del>,x<del>2</del>…]记为最优解</p>
+<h6 id="③加权法"><a href="#③加权法" class="headerlink" title="③加权法"></a>③加权法</h6><p>对m个目标，按照重要程度给予适当的权系数ω<del>i</del>≥0，且满足∑ω<del>i</del>=1，即可将多优化问题转化为单一目标优化问题</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714131448353.png" srcset="/img/loading.gif" lazyload alt="image-20210714131448353"></p>
+<p>所得到的解[x<del>1</del>,x<del>2</del>…]记为最优解</p>
+<h6 id="④理想点法"><a href="#④理想点法" class="headerlink" title="④理想点法"></a>④理想点法</h6><p>分别先求解m个单目标问题，令</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714131849213.png" srcset="/img/loading.gif" lazyload alt="image-20210714131849213"></p>
+<p>即可转化为单目标问题</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714131908134.png" srcset="/img/loading.gif" lazyload alt="image-20210714131908134"></p>
+<p>其中权系数ω<del>i</del>≥0，且满足∑ω<del>i</del>=1，所得到的解[x<del>1</del>,x<del>2</del>…]记为最优解</p>
+<h2 id="四-现代最优化算法-基于精英策略的快速非支配排序遗传算法"><a href="#四-现代最优化算法-基于精英策略的快速非支配排序遗传算法" class="headerlink" title="四.现代最优化算法(基于精英策略的快速非支配排序遗传算法)"></a>四.现代最优化算法(基于精英策略的快速非支配排序遗传算法)</h2><h6 id="1-算法框图"><a href="#1-算法框图" class="headerlink" title="1.算法框图"></a>1.算法框图</h6><p><img src="https://img-blog.csdn.net/20180928200948897?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>Pareto等级：在一组解中，非支配解Pareto等级定义为1，将非支配解从解的集合中删除，剩下解的Pareto等级定义为2，依次类推，可以得到该解集合中所有解的Pareto等级。示意图如图1所示。</p>
+<p><img src="https://img-blog.csdn.net/20180928093456676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>对同一等级的点，通过拥挤度进行划分</p>
+<h6 id="拥挤度："><a href="#拥挤度：" class="headerlink" title="拥挤度："></a>拥挤度：</h6><p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714132954604.png" srcset="/img/loading.gif" lazyload alt="image-20210714132954604"></p>
+<p><img src="https://img-blog.csdn.net/20180928194624441?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNDM0NDMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload alt="拥挤度示意图"></p>
+<h6 id="精英保留策略-根据拥挤选择算子-选择出较优的新的N个点"><a href="#精英保留策略-根据拥挤选择算子-选择出较优的新的N个点" class="headerlink" title="精英保留策略(根据拥挤选择算子)选择出较优的新的N个点"></a>精英保留策略(根据拥挤选择算子)选择出较优的新的N个点</h6><h6 id="拥挤选择算子："><a href="#拥挤选择算子：" class="headerlink" title="拥挤选择算子："></a>拥挤选择算子：</h6><p>在NSGA-II中，定义拥挤比较算子，假设i，j分别表示种群P的两个个体。满足下列条件之一</p>
+<p>1).i<del>rank</del>&lt;j<del>rank</del></p>
+<p>2).i<del>rank</del>=j<del>rank</del>,且d<del>i</del>&gt;d<del>j</del></p>
+<p>即可称个体i优于个体j</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714133202324.png" srcset="/img/loading.gif" lazyload alt="image-20210714133202324"></p>
+<h4 id="确定算法选项"><a href="#确定算法选项" class="headerlink" title="确定算法选项"></a>确定算法选项</h4><h6 id="最优个体系数paretoFraction"><a href="#最优个体系数paretoFraction" class="headerlink" title="% 最优个体系数paretoFraction"></a>% 最优个体系数paretoFraction</h6><h6 id="种群大小populationsize"><a href="#种群大小populationsize" class="headerlink" title="% 种群大小populationsize"></a>% 种群大小populationsize</h6><h6 id="最大进化代数generations"><a href="#最大进化代数generations" class="headerlink" title="% 最大进化代数generations"></a>% 最大进化代数generations</h6><h6 id="停止代数stallGenLimit"><a href="#停止代数stallGenLimit" class="headerlink" title="% 停止代数stallGenLimit"></a>% 停止代数stallGenLimit</h6><h6 id="适应度函数偏差TolFun"><a href="#适应度函数偏差TolFun" class="headerlink" title="% 适应度函数偏差TolFun"></a>% 适应度函数偏差TolFun</h6><h6 id="调用matlab库函数gamultiobj即可求解。"><a href="#调用matlab库函数gamultiobj即可求解。" class="headerlink" title="调用matlab库函数gamultiobj即可求解。"></a>调用matlab库函数gamultiobj即可求解。</h6><h6 id="五-样例示范"><a href="#五-样例示范" class="headerlink" title="五.样例示范"></a>五.样例示范</h6><p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714134533866.png" srcset="/img/loading.gif" lazyload alt="image-20210714134533866"></p>
+<p>建立模型</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714135013536.png" srcset="/img/loading.gif" lazyload alt="image-20210714135013536"></p>
+<p>程序求解</p>
+<p>所得Pareto最优解为</p>
+<p>10932.6429473119    14.6295387130128<br>14605.3404613523    18.2262297321479<br>12068.3433707838    15.1109915229892<br>12429.0573504143    15.4986606722887<br>14532.6593388757    18.1842935253039<br>11131.9589772932    14.7011627210495</p>
+<p>….</p>
+<p>12231.6101793012    15.3304399641518<br>14601.9178238651    18.2252135575028<br>12925.9261417602    15.9920094703867</p>
+<p>对应x为</p>
+<p>267.971023073048    51.3565915834627    455.633097995301    125.585979212038<br>252.525614499897    239.427658309710    457.418751888526    128.750437678343<br>254.389944994419    171.851099214132    358.767031591140    127.301254104520<br>254.132868382987    186.732012546206    363.703424720114    127.760522787065<br>262.449535283310    233.128879659259    454.068085989463    128.340668641702<br>265.164827238227    73.5469917676312    436.961892621559    126.130582721401<br>255.486999974281    230.161706396739    363.122909473250    128.882635799297<br>256.416538867289    200.269620434745    381.067408667307    128.202939645206<br>261.153624157576    113.996154755591    403.634395120644    126.983182335415</p>
+<p>…</p>
+<p>252.260342156546    239.240158309710    457.928750235712    128.526159519777<br>253.531045975866    212.059789018681    363.552109061208    127.628185206671</p>
+<p>pateto front 图</p>
+<p><img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20210714135454124.png" srcset="/img/loading.gif" lazyload alt="image-20210714135454124"></p>
+<p>源代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%[x,fval]=gamultiobj(fitnessfcn,nvars,A,b,Aeq,beq,lb,ub,options)</span><br><br>clear;clc;<br><br>fitnessfcn=@fun;<br>nvars=<span class="hljs-number">4</span>;<br>A=[<span class="hljs-number">0.015</span> <span class="hljs-number">0.02</span> <span class="hljs-number">0.018</span> <span class="hljs-number">0.011</span><br>   <span class="hljs-number">13</span> <span class="hljs-number">13.5</span> <span class="hljs-number">14</span> <span class="hljs-number">11.5</span><br>   <span class="hljs-number">-13</span> <span class="hljs-number">-13.5</span> <span class="hljs-number">-14</span> <span class="hljs-number">-11.5</span>];<br>b=[<span class="hljs-number">20</span>;<span class="hljs-number">14400</span>;<span class="hljs-number">-12000</span>];<br>Aeq=[];<br>beq=[];<br>lb=[<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">150</span> <span class="hljs-number">0</span>];<br>ub=[<span class="hljs-number">270</span> <span class="hljs-number">240</span> <span class="hljs-number">460</span> <span class="hljs-number">130</span>];<br>options=gaoptimset(<span class="hljs-string">&#x27;paretoFraction&#x27;</span>,<span class="hljs-number">0.3</span>,<span class="hljs-string">&#x27;populationsize&#x27;</span>,<span class="hljs-number">200</span>,<span class="hljs-string">&#x27;generations&#x27;</span>,<span class="hljs-number">300</span>,<span class="hljs-string">&#x27;stallGenLimit&#x27;</span>,<span class="hljs-number">200</span>,<span class="hljs-string">&#x27;TolFun&#x27;</span>,<span class="hljs-number">1e-10</span>,<span class="hljs-string">&#x27;PlotFcns&#x27;</span>,@gaplotpareto);<br>[x,fval]=gamultiobj(fitnessfcn,nvars,A,b,Aeq,beq,lb,ub,options);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">y</span>=<span class="hljs-title">fun</span><span class="hljs-params">(x)</span></span><br>y(<span class="hljs-number">1</span>)=<span class="hljs-number">-10.</span>*x(<span class="hljs-number">1</span>)+<span class="hljs-number">-20.</span>*x(<span class="hljs-number">2</span>)+<span class="hljs-number">-12.</span>*x(<span class="hljs-number">3</span>)+<span class="hljs-number">-14.</span>*x(<span class="hljs-number">4</span>);<br>y(<span class="hljs-number">2</span>)=<span class="hljs-number">0.015</span>.*x(<span class="hljs-number">1</span>)+<span class="hljs-number">0.02</span>.*x(<span class="hljs-number">2</span>)+<span class="hljs-number">0.018</span>.*x(<span class="hljs-number">3</span>)+<span class="hljs-number">0.011</span>.*x(<span class="hljs-number">4</span>);<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>参考文献：</p>
+<p>1.数学建模算法及其应用（第二版）</p>
+<p>2.博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47102975/article/details/108253584%EF%BC%8C">https://blog.csdn.net/weixin_47102975/article/details/108253584，</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/25/passage5/">
+                        <span class="hidden-mobile">测试文章</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Q70z977ec13I7d2rb4KYtLAA-gzGzoHsz","appKey":"ITSfPllxzGWL1eYj7FINIc2n","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+	<!--《添加网站运行时间 -->
+<br/>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+var now = new Date(); 
+
+function createtime() {
+    //此处修改你的建站时间或者网站上线时间
+    var grt = new Date('09/25/2021 8:00:00');
+    now.setTime(now.getTime() + 250);
+    days = (now - grt) / 1000 / 60 / 60 / 24;
+
+    dnum = Math.floor(days);
+    hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+        hnum = "0" + hnum;
+    }
+    minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+        mnum = "0" + mnum;
+    }
+    seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+        snum = "0" + snum;
+    }
+    document.getElementById("timeDate").innerHTML = " 本站已运行 " + dnum + " 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+}
+setInterval("createtime()", 250);
+</script>
+
+<!-- 添加网站运行时间》-->
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
