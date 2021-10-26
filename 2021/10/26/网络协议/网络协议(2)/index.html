@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" >
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="计算机网络-网络分层(二)">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="计算机网络-网络分层(二)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-网络分层(二)">
+<meta property="og:url" content="http://example.com/2021/10/26/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE(2)/index.html">
+<meta property="og:site_name" content="float">
+<meta property="og:description" content="计算机网络-网络分层(二)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/10/23/R2TNusyfwdLZ96j.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/10/23/D3Rdv71erfx2Fmw.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/23/m7OcQS2FNgptJiV.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/yfPEUH7RF4veIpS.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/kRhMbXSm9PeZ1Lu.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/T24uGtcZ7RYglnV.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/DHlYtypFk528u1s.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/4eKr79qAPS8dJLp.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/i3CaodVRlJtFuGN.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/IKx5GfDq3wQLzdg.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/Dp2hQv1UfVyzSAw.jpg">
+<meta property="article:published_time" content="2021-10-26T03:06:03.443Z">
+<meta property="article:modified_time" content="2021-10-26T03:09:19.265Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="网络协议">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/23/R2TNusyfwdLZ96j.jpg">
+  
+  <title>计算机网络-网络分层(二) - float</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Q70z977ec13I7d2rb4KYtLAA-gzGzoHsz","app_key":"ITSfPllxzGWL1eYj7FINIc2n","server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>float</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/back.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络-网络分层(二)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-26 11:06" pubdate>
+        2021年10月26日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络-网络分层(二)</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年10月26日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="计算机网络-网络分层-二"><a href="#计算机网络-网络分层-二" class="headerlink" title="计算机网络-网络分层(二)"></a>计算机网络-网络分层(二)</h1><span id="more"></span>
+
+<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><h6 id="应用层常见协议"><a href="#应用层常见协议" class="headerlink" title="应用层常见协议"></a>应用层常见协议</h6><h6 id="超文本传输-HTTP-HTTPS"><a href="#超文本传输-HTTP-HTTPS" class="headerlink" title="超文本传输:HTTP/HTTPS"></a>超文本传输:HTTP/HTTPS</h6><h6 id="文件传输-FTP"><a href="#文件传输-FTP" class="headerlink" title="文件传输:FTP"></a>文件传输:FTP</h6><h6 id="电子邮件-SMTP-POP3-IMAP"><a href="#电子邮件-SMTP-POP3-IMAP" class="headerlink" title="电子邮件:SMTP,POP3,IMAP"></a>电子邮件:SMTP,POP3,IMAP</h6><h6 id="动态主机配置-DHCP"><a href="#动态主机配置-DHCP" class="headerlink" title="动态主机配置:DHCP"></a>动态主机配置:DHCP</h6><h6 id="域名系统-DNS"><a href="#域名系统-DNS" class="headerlink" title="域名系统:DNS"></a>域名系统:DNS</h6><h3 id="1-NDS"><a href="#1-NDS" class="headerlink" title="1.NDS"></a>1.NDS</h3><h6 id="域名-Domain-由于IP地址不便于记忆，且不具有表达特定名称和含义，于是就有了域名-eg-www-baidu-com"><a href="#域名-Domain-由于IP地址不便于记忆，且不具有表达特定名称和含义，于是就有了域名-eg-www-baidu-com" class="headerlink" title="域名(Domain):由于IP地址不便于记忆，且不具有表达特定名称和含义，于是就有了域名(eg:www.baidu.com)"></a>域名(Domain):由于IP地址不便于记忆，且不具有表达特定名称和含义，于是就有了域名(eg:<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>)</h6><h6 id="为什么直接用域名，不用IP地址"><a href="#为什么直接用域名，不用IP地址" class="headerlink" title="为什么直接用域名，不用IP地址"></a>为什么直接用域名，不用IP地址</h6><h6 id="IP地址固定为4个字节，域名字节数较多，会增加网络负担，浪费流量"><a href="#IP地址固定为4个字节，域名字节数较多，会增加网络负担，浪费流量" class="headerlink" title="IP地址固定为4个字节，域名字节数较多，会增加网络负担，浪费流量"></a>IP地址固定为4个字节，域名字节数较多，会增加网络负担，浪费流量</h6><h6 id="NDS-Domain-Name-System-域名系统"><a href="#NDS-Domain-Name-System-域名系统" class="headerlink" title="NDS(Domain Name System)域名系统"></a>NDS(Domain Name System)域名系统</h6><h6 id="功能-利用DNS协议，可以将域名-baidu-com-解析为对应的IP地址-如220-181-38-13"><a href="#功能-利用DNS协议，可以将域名-baidu-com-解析为对应的IP地址-如220-181-38-13" class="headerlink" title="功能:利用DNS协议，可以将域名(baidu.com)解析为对应的IP地址(如220.181.38.13)"></a>功能:利用DNS协议，可以将域名(baidu.com)解析为对应的IP地址(如220.181.38.13)</h6><h6 id="DNS基于UDP-TCP协议，DNS服务器占用53端口"><a href="#DNS基于UDP-TCP协议，DNS服务器占用53端口" class="headerlink" title="DNS基于UDP/TCP协议，DNS服务器占用53端口"></a>DNS基于UDP/TCP协议，DNS服务器占用53端口</h6><p><img src="https://i.loli.net/2021/10/23/R2TNusyfwdLZ96j.jpg" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<p><img src="https://i.loli.net/2021/10/23/D3Rdv71erfx2Fmw.png" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<h6 id="DNS相关终端命令"><a href="#DNS相关终端命令" class="headerlink" title="DNS相关终端命令"></a>DNS相关终端命令</h6><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">ipconfig <span class="hljs-string">/displaydns</span>  <span class="hljs-string">//</span>查看DNS缓存<br>ipconfig <span class="hljs-string">/flushdns</span>  <span class="hljs-string">//</span>清空DNS缓存<br>ping 域名<br>nslookup 域名<br></code></pre></td></tr></table></figure>
+
+<h3 id="DHCP协议"><a href="#DHCP协议" class="headerlink" title="DHCP协议"></a>DHCP协议</h3><h6 id="Dynamic-Host-Configuration-Protocol-即为动态主机配置协议"><a href="#Dynamic-Host-Configuration-Protocol-即为动态主机配置协议" class="headerlink" title="Dynamic Host Configuration Protocol 即为动态主机配置协议"></a>Dynamic Host Configuration Protocol 即为动态主机配置协议</h6><h6 id="IP地址的分配"><a href="#IP地址的分配" class="headerlink" title="IP地址的分配"></a>IP地址的分配</h6><h6 id="IP地址按照分配方式可分为静态IP地址-动态IP地址"><a href="#IP地址按照分配方式可分为静态IP地址-动态IP地址" class="headerlink" title="IP地址按照分配方式可分为静态IP地址/动态IP地址"></a>IP地址按照分配方式可分为静态IP地址/动态IP地址</h6><h6 id="静态IP地址"><a href="#静态IP地址" class="headerlink" title="静态IP地址"></a>静态IP地址</h6><h6 id="1-手动设置"><a href="#1-手动设置" class="headerlink" title="1.手动设置"></a>1.手动设置</h6><h6 id="2-使用场景-不方便挪动的及其，服务器等"><a href="#2-使用场景-不方便挪动的及其，服务器等" class="headerlink" title="2.使用场景:不方便挪动的及其，服务器等"></a>2.使用场景:不方便挪动的及其，服务器等</h6><h6 id="动态IP地址"><a href="#动态IP地址" class="headerlink" title="动态IP地址"></a>动态IP地址</h6><h6 id="1-从DHCP服务器自动获取IP地址"><a href="#1-从DHCP服务器自动获取IP地址" class="headerlink" title="1.从DHCP服务器自动获取IP地址"></a>1.从DHCP服务器自动获取IP地址</h6><h6 id="2-使用场景-移动设备，手机等"><a href="#2-使用场景-移动设备，手机等" class="headerlink" title="2.使用场景:移动设备，手机等"></a>2.使用场景:移动设备，手机等</h6><h6 id="DHCP-分配IP地址的四个阶段"><a href="#DHCP-分配IP地址的四个阶段" class="headerlink" title="DHCP-分配IP地址的四个阶段"></a>DHCP-分配IP地址的四个阶段</h6><h6 id="1-DISCOVER-发现服务器"><a href="#1-DISCOVER-发现服务器" class="headerlink" title="1.DISCOVER-发现服务器"></a>1.DISCOVER-发现服务器</h6><h6 id="2-OFFER-提供IP地址租用服务"><a href="#2-OFFER-提供IP地址租用服务" class="headerlink" title="2.OFFER-提供IP地址租用服务"></a>2.OFFER-提供IP地址租用服务</h6><h6 id="3-REQUEST-选择IP地址"><a href="#3-REQUEST-选择IP地址" class="headerlink" title="3.REQUEST-选择IP地址"></a>3.REQUEST-选择IP地址</h6><h6 id="4-ACKNOWLEDGE-确认租用IP"><a href="#4-ACKNOWLEDGE-确认租用IP" class="headerlink" title="4.ACKNOWLEDGE-确认租用IP"></a>4.ACKNOWLEDGE-确认租用IP</h6><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h6 id="Hyper-Text-Transfer-Protocol，超文本传输协议"><a href="#Hyper-Text-Transfer-Protocol，超文本传输协议" class="headerlink" title="Hyper Text Transfer Protocol，超文本传输协议"></a>Hyper Text Transfer Protocol，超文本传输协议</h6><p><img src="https://i.loli.net/2021/10/23/m7OcQS2FNgptJiV.png" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<p><img src="https://i.loli.net/2021/10/24/yfPEUH7RF4veIpS.png" srcset="/img/loading.gif" lazyload alt="image-20211024100042678"></p>
+<h6 id="官方文档-ABNF-RFC文档"><a href="#官方文档-ABNF-RFC文档" class="headerlink" title="官方文档:ABNF/RFC文档"></a>官方文档:ABNF/RFC文档</h6><h6 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h6><h6 id="URL中出现了特殊字符-比如中文，空格-，需要进行编码"><a href="#URL中出现了特殊字符-比如中文，空格-，需要进行编码" class="headerlink" title="URL中出现了特殊字符(比如中文，空格)，需要进行编码"></a>URL中出现了特殊字符(比如中文，空格)，需要进行编码</h6><h6 id="在浏览器地址栏输入URL时，是采用UTF-8编码"><a href="#在浏览器地址栏输入URL时，是采用UTF-8编码" class="headerlink" title="在浏览器地址栏输入URL时，是采用UTF-8编码"></a>在浏览器地址栏输入URL时，是采用UTF-8编码</h6><h6 id="xshell-telnet"><a href="#xshell-telnet" class="headerlink" title="xshell+telnet"></a>xshell+telnet</h6><h6 id="面向报文与服务器交互"><a href="#面向报文与服务器交互" class="headerlink" title="面向报文与服务器交互"></a>面向报文与服务器交互</h6><h6 id="可直接发送报文给服务器，从而检验报文的合法性"><a href="#可直接发送报文给服务器，从而检验报文的合法性" class="headerlink" title="可直接发送报文给服务器，从而检验报文的合法性"></a>可直接发送报文给服务器，从而检验报文的合法性</h6><h6 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h6><h6 id="GET-HEAD-POST-PUT-DELETE-CONNECT-OPTIONS-TRACE"><a href="#GET-HEAD-POST-PUT-DELETE-CONNECT-OPTIONS-TRACE" class="headerlink" title="GET/HEAD/POST/PUT/DELETE/CONNECT/OPTIONS/TRACE"></a>GET/HEAD/POST/PUT/DELETE/CONNECT/OPTIONS/TRACE</h6><h5 id="GET-常用于读取的操作，请求参数直接拼接在URL后面-浏览器对URL长度有限定"><a href="#GET-常用于读取的操作，请求参数直接拼接在URL后面-浏览器对URL长度有限定" class="headerlink" title="GET:常用于读取的操作，请求参数直接拼接在URL后面(浏览器对URL长度有限定)"></a>GET:常用于读取的操作，请求参数直接拼接在URL后面(浏览器对URL长度有限定)</h5><h6 id="POST-常用于添加，修改，删除的操作，请求参数放在请求体中-没有长度限定"><a href="#POST-常用于添加，修改，删除的操作，请求参数放在请求体中-没有长度限定" class="headerlink" title="POST:常用于添加，修改，删除的操作，请求参数放在请求体中(没有长度限定)"></a>POST:常用于添加，修改，删除的操作，请求参数放在请求体中(没有长度限定)</h6><h6 id="HEAD-请求得到与GET相同的响应，没有响应体"><a href="#HEAD-请求得到与GET相同的响应，没有响应体" class="headerlink" title="HEAD:请求得到与GET相同的响应，没有响应体"></a>HEAD:请求得到与GET相同的响应，没有响应体</h6><h6 id="头部字段-详情见维基百科https-zh-wikipedia-org-wiki-HTTP-E5-A4-B4-E5-AD-97-E6-AE-B5"><a href="#头部字段-详情见维基百科https-zh-wikipedia-org-wiki-HTTP-E5-A4-B4-E5-AD-97-E6-AE-B5" class="headerlink" title="头部字段(详情见维基百科https://zh.wikipedia.org/wiki/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5)"></a>头部字段(详情见维基百科<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5">https://zh.wikipedia.org/wiki/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5</a>)</h6><h3 id="请求头字段"><a href="#请求头字段" class="headerlink" title="请求头字段"></a>请求头字段</h3><table>
+<thead>
+<tr>
+<th align="center">首部字段名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Accept</td>
+<td align="left">用户代理可处理的媒体类型</td>
+</tr>
+<tr>
+<td align="center">Accept-Charset</td>
+<td align="left">优先的字符集</td>
+</tr>
+<tr>
+<td align="center">Accept-Encoding</td>
+<td align="left">优先的内容编码</td>
+</tr>
+<tr>
+<td align="center">Accept-Language</td>
+<td align="left">优先的语言</td>
+</tr>
+<tr>
+<td align="center">Host</td>
+<td align="left">指定资源所在服务器</td>
+</tr>
+<tr>
+<td align="center">If-Match</td>
+<td align="left">比较实体标记（ETag）</td>
+</tr>
+<tr>
+<td align="center">If-Modified-Since</td>
+<td align="left">比较资源的更新时间</td>
+</tr>
+<tr>
+<td align="center">If-None-Match</td>
+<td align="left">比较实体标记（与If-Match相反）</td>
+</tr>
+<tr>
+<td align="center">Referer</td>
+<td align="left">对请求中URI的原始获取方</td>
+</tr>
+<tr>
+<td align="center">User-Agent</td>
+<td align="left">Http客户端程序的信息</td>
+</tr>
+</tbody></table>
+<h3 id="响应头字段"><a href="#响应头字段" class="headerlink" title="响应头字段"></a>响应头字段</h3><table>
+<thead>
+<tr>
+<th align="center">首部字段名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Accept-Range</td>
+<td align="left">是否接受字节范围请求</td>
+</tr>
+<tr>
+<td align="center">ETag</td>
+<td align="left">资源的匹配信息</td>
+</tr>
+<tr>
+<td align="center">Location</td>
+<td align="left">另客户端重定向至指定URI</td>
+</tr>
+<tr>
+<td align="center">Server</td>
+<td align="left">Http服务器的安装信息</td>
+</tr>
+<tr>
+<td align="center">Vary</td>
+<td align="left">代理服务器缓存的管理信息</td>
+</tr>
+</tbody></table>
+<h3 id="实体头字段"><a href="#实体头字段" class="headerlink" title="实体头字段"></a>实体头字段</h3><table>
+<thead>
+<tr>
+<th align="center">首部字段名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Allow</td>
+<td align="left">资源可支持的Http方法</td>
+</tr>
+<tr>
+<td align="center">Content-Encoding</td>
+<td align="left">实体主体适用的编码方式</td>
+</tr>
+<tr>
+<td align="center">Content-Language</td>
+<td align="left">实体主体的自然语言</td>
+</tr>
+<tr>
+<td align="center">Content-Length</td>
+<td align="left">实体主体的大小（字节）</td>
+</tr>
+<tr>
+<td align="center">Content-Location</td>
+<td align="left">替代对应资源的URI</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="left">实体主体的媒体类型</td>
+</tr>
+<tr>
+<td align="center">Expires</td>
+<td align="left">实体主体过期的日期时间</td>
+</tr>
+<tr>
+<td align="center">Last-Modified</td>
+<td align="left">资源的最后修改日期时间</td>
+</tr>
+</tbody></table>
+<h3 id="通用头字段"><a href="#通用头字段" class="headerlink" title="通用头字段"></a>通用头字段</h3><table>
+<thead>
+<tr>
+<th align="center">首部字段名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cache-Control</td>
+<td align="left">控制缓存的行为</td>
+</tr>
+<tr>
+<td align="center">Connextion</td>
+<td align="left">逐跳首部、连接的管理</td>
+</tr>
+<tr>
+<td align="center">Date</td>
+<td align="left">创建报文的日期时间</td>
+</tr>
+<tr>
+<td align="center">Pragma</td>
+<td align="left">报文指令</td>
+</tr>
+<tr>
+<td align="center">Transfer-Encoding</td>
+<td align="left">指定报文主体的传输编码方式</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center">类别</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1XX</td>
+<td align="center">Informational（信息性状态码）</td>
+<td>接收的请求正在处理</td>
+</tr>
+<tr>
+<td align="left">2XX</td>
+<td align="center">Success（成功状态码）</td>
+<td>请求正常处理完毕</td>
+</tr>
+<tr>
+<td align="left">3XX</td>
+<td align="center">Redirection（重定向）</td>
+<td>需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td align="left">4XX</td>
+<td align="center">Client Error（客户端错误状态码）</td>
+<td>服务器无法处理请求</td>
+</tr>
+<tr>
+<td align="left">5XX</td>
+<td align="center">Server Error（服务器错误状态码）</td>
+<td>服务器处理请求出错</td>
+</tr>
+</tbody></table>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h6 id="在客户端-浏览器-存储一些数据"><a href="#在客户端-浏览器-存储一些数据" class="headerlink" title="在客户端(浏览器)存储一些数据"></a>在客户端(浏览器)存储一些数据</h6><h6 id="服务器可以返回cookie交给客户端去存储"><a href="#服务器可以返回cookie交给客户端去存储" class="headerlink" title="服务器可以返回cookie交给客户端去存储"></a>服务器可以返回cookie交给客户端去存储</h6><h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><h6 id="在服务器中存储一些数据"><a href="#在服务器中存储一些数据" class="headerlink" title="在服务器中存储一些数据"></a>在服务器中存储一些数据</h6><h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><h6 id="特点"><a href="#特点" class="headerlink" title="特点:"></a>特点:</h6><h6 id="1-本身不产生内容"><a href="#1-本身不产生内容" class="headerlink" title="1.本身不产生内容"></a>1.本身不产生内容</h6><h6 id="2-处于中间位置转发上下游的请求和响应"><a href="#2-处于中间位置转发上下游的请求和响应" class="headerlink" title="2.处于中间位置转发上下游的请求和响应"></a>2.处于中间位置转发上下游的请求和响应</h6><h6 id="面向下游的客户端-他是服务器"><a href="#面向下游的客户端-他是服务器" class="headerlink" title="面向下游的客户端:他是服务器"></a>面向下游的客户端:他是服务器</h6><h6 id="面向上游的服务端-他是客户端"><a href="#面向上游的服务端-他是客户端" class="headerlink" title="面向上游的服务端:他是客户端"></a>面向上游的服务端:他是客户端</h6><p><img src="https://i.loli.net/2021/10/24/kRhMbXSm9PeZ1Lu.jpg" srcset="/img/loading.gif" lazyload alt="代理服务器 的图像结果"></p>
+<h6 id="正向代理-代理的对象是客户端"><a href="#正向代理-代理的对象是客户端" class="headerlink" title="正向代理(代理的对象是客户端)"></a>正向代理(代理的对象是客户端)</h6><h6 id="隐藏客户端身份"><a href="#隐藏客户端身份" class="headerlink" title="隐藏客户端身份"></a>隐藏客户端身份</h6><h6 id="绕过防火墙-突破访问限制"><a href="#绕过防火墙-突破访问限制" class="headerlink" title="绕过防火墙(突破访问限制)"></a>绕过防火墙(突破访问限制)</h6><p><img src="https://i.loli.net/2021/10/24/T24uGtcZ7RYglnV.png" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<h6 id="Internet访问控制"><a href="#Internet访问控制" class="headerlink" title="Internet访问控制"></a>Internet访问控制</h6><h6 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h6><h6 id="反向代理-代理的对象是服务端"><a href="#反向代理-代理的对象是服务端" class="headerlink" title="反向代理(代理的对象是服务端)"></a>反向代理(代理的对象是服务端)</h6><h6 id="隐藏服务器身份"><a href="#隐藏服务器身份" class="headerlink" title="隐藏服务器身份"></a>隐藏服务器身份</h6><h6 id="安全防护"><a href="#安全防护" class="headerlink" title="安全防护"></a>安全防护</h6><h6 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h6><h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><h6 id="content-delivery-network-内容分发网络"><a href="#content-delivery-network-内容分发网络" class="headerlink" title="content delivery network ,内容分发网络"></a>content delivery network ,内容分发网络</h6><h6 id="功能-利用更靠近每位用户的服务器，更快更可靠地传输资源文件给用户"><a href="#功能-利用更靠近每位用户的服务器，更快更可靠地传输资源文件给用户" class="headerlink" title="功能:利用更靠近每位用户的服务器，更快更可靠地传输资源文件给用户"></a>功能:利用更靠近每位用户的服务器，更快更可靠地传输资源文件给用户</h6><p><img src="https://i.loli.net/2021/10/24/DHlYtypFk528u1s.png" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<h4 id="ARP攻击-网络层"><a href="#ARP攻击-网络层" class="headerlink" title="ARP攻击(网络层)"></a>ARP攻击(网络层)</h4><h6 id="中间人攻击，攻击主机作为被攻击主机间的中间人，破坏其正常通信"><a href="#中间人攻击，攻击主机作为被攻击主机间的中间人，破坏其正常通信" class="headerlink" title="中间人攻击，攻击主机作为被攻击主机间的中间人，破坏其正常通信"></a>中间人攻击，攻击主机作为被攻击主机间的中间人，破坏其正常通信</h6><h4 id="DoS攻击"><a href="#DoS攻击" class="headerlink" title="DoS攻击"></a>DoS攻击</h4><h6 id="使目标电脑的网络或者系统资源耗尽，使服务暂时中断或者停止，导致正常用户无法访问"><a href="#使目标电脑的网络或者系统资源耗尽，使服务暂时中断或者停止，导致正常用户无法访问" class="headerlink" title="使目标电脑的网络或者系统资源耗尽，使服务暂时中断或者停止，导致正常用户无法访问"></a>使目标电脑的网络或者系统资源耗尽，使服务暂时中断或者停止，导致正常用户无法访问</h6><h6 id="DoS攻击分为2大类"><a href="#DoS攻击分为2大类" class="headerlink" title="DoS攻击分为2大类"></a>DoS攻击分为2大类</h6><h6 id="1-带宽消耗型-UDP洪水攻击-ICMP洪水攻击"><a href="#1-带宽消耗型-UDP洪水攻击-ICMP洪水攻击" class="headerlink" title="1.带宽消耗型:UDP洪水攻击,ICMP洪水攻击"></a>1.带宽消耗型:UDP洪水攻击,ICMP洪水攻击</h6><h6 id="2-资源消耗性-SYN洪水攻击-发送一系列SYN请求，因收不到第三次握手导致服务器等待，消耗资源-，LAND攻击"><a href="#2-资源消耗性-SYN洪水攻击-发送一系列SYN请求，因收不到第三次握手导致服务器等待，消耗资源-，LAND攻击" class="headerlink" title="2.资源消耗性:SYN洪水攻击(发送一系列SYN请求，因收不到第三次握手导致服务器等待，消耗资源)，LAND攻击"></a>2.资源消耗性:SYN洪水攻击(发送一系列SYN请求，因收不到第三次握手导致服务器等待，消耗资源)，LAND攻击</h6><h4 id="DDoS攻击"><a href="#DDoS攻击" class="headerlink" title="DDoS攻击"></a>DDoS攻击</h4><h6 id="使用网络上两个或多个被攻陷的电脑作为僵尸-肉鸡向特定的目标进行DoS攻击"><a href="#使用网络上两个或多个被攻陷的电脑作为僵尸-肉鸡向特定的目标进行DoS攻击" class="headerlink" title="使用网络上两个或多个被攻陷的电脑作为僵尸/肉鸡向特定的目标进行DoS攻击"></a>使用网络上两个或多个被攻陷的电脑作为僵尸/肉鸡向特定的目标进行DoS攻击</h6><h4 id="DNS劫持-应用层"><a href="#DNS劫持-应用层" class="headerlink" title="DNS劫持(应用层)"></a>DNS劫持(应用层)</h4><h6 id="攻击者篡改某个域名的解析结果，使指向该域名的IP变成了另一个IP"><a href="#攻击者篡改某个域名的解析结果，使指向该域名的IP变成了另一个IP" class="headerlink" title="攻击者篡改某个域名的解析结果，使指向该域名的IP变成了另一个IP"></a>攻击者篡改某个域名的解析结果，使指向该域名的IP变成了另一个IP</h6><h4 id="HTTP劫持"><a href="#HTTP劫持" class="headerlink" title="HTTP劫持"></a>HTTP劫持</h4><h6 id="对HTTP数据包进行拦截处理，插入恶意js代码"><a href="#对HTTP数据包进行拦截处理，插入恶意js代码" class="headerlink" title="对HTTP数据包进行拦截处理，插入恶意js代码"></a>对HTTP数据包进行拦截处理，插入恶意js代码</h6><h6 id="HTTP协议的安全问题"><a href="#HTTP协议的安全问题" class="headerlink" title="HTTP协议的安全问题"></a>HTTP协议的安全问题</h6><h6 id="HTTP协议默认是明文传输的，因此会有很大安全隐患"><a href="#HTTP协议默认是明文传输的，因此会有很大安全隐患" class="headerlink" title="HTTP协议默认是明文传输的，因此会有很大安全隐患"></a>HTTP协议默认是明文传输的，因此会有很大安全隐患</h6><h6 id="单向散列函数"><a href="#单向散列函数" class="headerlink" title="单向散列函数"></a>单向散列函数</h6><h6 id="如何加密解密-加密算法-秘钥"><a href="#如何加密解密-加密算法-秘钥" class="headerlink" title="如何加密解密(加密算法+秘钥)"></a>如何加密解密(加密算法+秘钥)</h6><p><img src="https://i.loli.net/2021/10/25/4eKr79qAPS8dJLp.jpg" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<h6 id="对称加密-加密和解密用的秘钥相同"><a href="#对称加密-加密和解密用的秘钥相同" class="headerlink" title="对称加密:加密和解密用的秘钥相同"></a>对称加密:加密和解密用的秘钥相同</h6><h6 id="常见对称加密算法"><a href="#常见对称加密算法" class="headerlink" title="常见对称加密算法:"></a>常见对称加密算法:</h6><ol>
+<li>DES加密</li>
+<li>3DES加密</li>
+<li>AES加密</li>
+</ol>
+<h6 id="秘钥配送问题-如何解决"><a href="#秘钥配送问题-如何解决" class="headerlink" title="秘钥配送问题(如何解决)"></a>秘钥配送问题(如何解决)</h6><ol>
+<li>事先共享秘钥(比如私下共享)</li>
+<li>秘钥配送中心</li>
+<li>Diffie-Hellam配送</li>
+<li>非对称加密(公私钥加密)</li>
+</ol>
+<h6 id="非对称加密-公钥密码-加密和解密秘钥不同-复杂-gt-安全-gt-加解密速度快"><a href="#非对称加密-公钥密码-加密和解密秘钥不同-复杂-gt-安全-gt-加解密速度快" class="headerlink" title="非对称加密(公钥密码):加密和解密秘钥不同(复杂 -&gt; 安全 -&gt; 加解密速度快)"></a>非对称加密(公钥密码):加密和解密秘钥不同(复杂 -&gt; 安全 -&gt; 加解密速度快)</h6><ol>
+<li>RSA加密</li>
+</ol>
+<p><img src="https://i.loli.net/2021/10/25/i3CaodVRlJtFuGN.png" srcset="/img/loading.gif" lazyload alt="image-20211025202735696"></p>
+<h4 id="混合密码系统"><a href="#混合密码系统" class="headerlink" title="混合密码系统"></a>混合密码系统</h4><h6 id="是将对称加密和非对称加密的优势相结合"><a href="#是将对称加密和非对称加密的优势相结合" class="headerlink" title="是将对称加密和非对称加密的优势相结合"></a>是将对称加密和非对称加密的优势相结合</h6><p><img src="https://i.loli.net/2021/10/25/IKx5GfDq3wQLzdg.png" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<h6 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h6><p><img src="https://i.loli.net/2021/10/25/Dp2hQv1UfVyzSAw.jpg" srcset="/img/loading.gif" lazyload alt="查看源图像"></p>
+<p>证书</p>
+<h6 id="数字证书是由CA机构颁发的证明（也就是问题中提及的CA证书），它包含了公钥、公钥拥有者名称、CA的数字签名、有效期、授权中心名称、证书序列号等信息。"><a href="#数字证书是由CA机构颁发的证明（也就是问题中提及的CA证书），它包含了公钥、公钥拥有者名称、CA的数字签名、有效期、授权中心名称、证书序列号等信息。" class="headerlink" title="数字证书是由CA机构颁发的证明（也就是问题中提及的CA证书），它包含了公钥、公钥拥有者名称、CA的数字签名、有效期、授权中心名称、证书序列号等信息。"></a>数字证书是由CA机构颁发的证明（也就是问题中提及的CA证书），它包含了公钥、公钥拥有者名称、CA的数字签名、有效期、授权中心名称、证书序列号等信息。</h6><h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><h6 id="HTTPS是在HTTP基础上使用SSL-TLS来加密报文，对窃听和中间人攻击提供合理的防护"><a href="#HTTPS是在HTTP基础上使用SSL-TLS来加密报文，对窃听和中间人攻击提供合理的防护" class="headerlink" title="HTTPS是在HTTP基础上使用SSL/TLS来加密报文，对窃听和中间人攻击提供合理的防护"></a>HTTPS是在HTTP基础上使用SSL/TLS来加密报文，对窃听和中间人攻击提供合理的防护</h6>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，转载请注明出处！!
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/13/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE(1)/">
+                        <span class="hidden-mobile">计算机网络-网络分层(一)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Q70z977ec13I7d2rb4KYtLAA-gzGzoHsz","appKey":"ITSfPllxzGWL1eYj7FINIc2n","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>floatのblog</span></a> 
+	<!--《添加网站运行时间 -->
+<br/>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+var now = new Date(); 
+
+function createtime() {
+    //此处修改你的建站时间或者网站上线时间
+    var grt = new Date('09/25/2021 8:00:00');
+    now.setTime(now.getTime() + 250);
+    days = (now - grt) / 1000 / 60 / 60 / 24;
+
+    dnum = Math.floor(days);
+    hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+        hnum = "0" + hnum;
+    }
+    minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+        mnum = "0" + mnum;
+    }
+    seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+        snum = "0" + snum;
+    }
+    document.getElementById("timeDate").innerHTML = " 本站已运行 " + dnum + " 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+}
+setInterval("createtime()", 250);
+</script>
+
+<!-- 添加网站运行时间》-->
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP证123456号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/line.js%20/js/clock.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
+
+<!--单击显示文字-->
+<script type="text/javascript" src="\js\mouseclick.js"></script>
+
+<!--人体时钟背景透明-->
+<script charset="Shift_JIS" src="\js\clock.js"></script>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="\js\line.js">
+</script>
+
+
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
